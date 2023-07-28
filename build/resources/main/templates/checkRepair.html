@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link resource="main.css" type="text/css"/>
+</head>
+<body>
+<h1>Status naprawy</h1>
+
+<div th:if="${request}">
+    <h6>Aby sprawdzić status Twojej naprawy wypełnij poniższy formularz:</h6>
+    <form action="../api/check/order">
+        <label for="phone">Numer telefonu (wymagane)</label>
+        <input id="phone" type="text" name="phone">
+        <label for="email">Adres email (wymagane))</label>
+        <input id="email" type="text" name="email">
+        <label for="orderNumber">Wpisz numer zlecenia znajdujący się w SMS (wymagane)</label>
+        <input id="orderNumber" type="text" placeholder="W/20/1234" name="orderNumber">
+        <button type="submit">Wyślij</button>
+    </form>
+</div>
+<div th:unless="${request}">
+    <h6>Rezultat</h6>
+    <p th:text="'Numer zlecenia: ' + ${response.orderNumber}">Default text</p>
+    <p th:text="'Status: ' + ${response.orderStatus}">Default text</p>
+</div>
+</body>
+</html>
